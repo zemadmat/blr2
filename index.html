@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLR Calendrier des Matchs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Font Awesome -->
+
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h1><img src="blr_rose.jpg" alt="BLR rose" width="50"> BLR Calendrier des Matchs</h1>
+        <div class="filter-container">
+            
+            
+        </div>
+        <table id="matches-table" class="table table-bordered table-hover fade-in">
+            <thead>
+                <tr>
+                    
+                    <th> <label for="team-filter">Equipe</label>
+                        <select id="team-filter" class="form-control">
+                            <option value="">Toutes les équipes</option>
+                            <!-- Options seront générées dynamiquement -->
+                        </select></th>
+                    <th>Adversaire</th>
+                    <th> <label for="date-filter">Date du Match</label>
+                        <select id="date-filter" class="form-control">
+                            <option value="">Toutes les dates</option>
+                            <!-- Options seront générées dynamiquement -->
+                        </select>
+                    </th>
+                    <!-- Date du Match</th> -->
+                    <th>Heure</th>
+                    <th>Lieu</th>
+                    <th>Résultat</th>
+                    <th> <label for="competition-filter">Compétition</label>
+                        <select id="competition-filter" class="form-control">
+                            <option value="">Toutes les competitions</option>
+                            <!-- Options seront générées dynamiquement -->
+                        </select></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les matchs seront insérés ici -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS et dépendances -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="app_futur.js"></script>
+
+</body>
+
+</html>
