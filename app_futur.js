@@ -78,7 +78,7 @@ function filterMatches() {
     const selectedTeam = teamFilterSelect.value;
     const selectedDate = dateFilterSelect.value;
     const selectedCompet = competFilterSelect.value;
-    const selectedLieu = LieuFilterSelect.value;
+    const selectedLieu = lieuFilterSelect.value;
     // Filtrer les matchs
     let filteredMatches = allMatches;
 
