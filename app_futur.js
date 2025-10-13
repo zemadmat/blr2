@@ -4,6 +4,7 @@
         const teamFilterSelect = document.getElementById('team-filter');
         const dateFilterSelect = document.getElementById('date-filter');
         const competFilterSelect = document.getElementById('competition-filter');
+         const lieuFilterSelect = document.getElementById('lieu-filter');
 
         async function fetchMatches() {
             try {
@@ -27,6 +28,17 @@
                     teamFilterSelect.appendChild(option);
                 });
 
+                // Générer les options de filtre de lieu
+                const uniqueLieu = [...new Set(allMatches.map(match => match.location))];
+                uniqueLieu.sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
+
+                uniqueLieu.forEach(lieu => {
+                    const optionl = document.createElement('option');
+                    optionl.value = lieu;
+                    optionl.textContent = lieu;
+                    lieuFilterSelect.appendChild(optionl);
+                });
+                
                 // Générer les options de filtre de competitions
                 const uniqueCompet = [...new Set(allMatches.map(match => match.competition))];
                 uniqueCompet.sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
@@ -55,6 +67,7 @@
                 teamFilterSelect.addEventListener('change', filterMatches);
                 competFilterSelect.addEventListener('change', filterMatches);
                 dateFilterSelect.addEventListener('change', filterMatches);
+                lieuFilterSelect.addEventListener('change', filterMatches);
             } catch (error) {
                 console.error('Erreur de chargement des matchs:', error);
             }
@@ -65,13 +78,17 @@ function filterMatches() {
     const selectedTeam = teamFilterSelect.value;
     const selectedDate = dateFilterSelect.value;
     const selectedCompet = competFilterSelect.value;
-    
+    const selectedLieu = LieuFilterSelect.value;
     // Filtrer les matchs
     let filteredMatches = allMatches;
 
     // Filtre par équipe
     if (selectedTeam) {
         filteredMatches = filteredMatches.filter(match => match.team === selectedTeam);
+    }
+        // Filtre par lieu
+    if (selectedLieu) {
+        filteredMatches = filteredMatches.filter(match => match.location === selectedLieu);
     }
     // Filtre par competition
     if (selectedCompet) {
