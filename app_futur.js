@@ -163,11 +163,12 @@ function displayMatches(matches) {
         const todayPlus7Days = new Date(todayNew);
         todayPlus7Days.setDate(todayNew.getDate() + 7);
 
+        const url15 = 'https://www.ffhandball.fr/competitions/saison-2025-2026-21/departemental/57-10-15-m-jouer-28577/poule-172859'
         row.innerHTML = `
             <td>${match.team}</td>
             <td>${match.opponent}</td>
-            <td>${match.match_date}</td>
-            <td>${match.time}</td>                      
+            <td>${match.match_date == '2025-11-08' ? '<i class="fa-solid fa-bell"></i>' : ''} ${match.match_date == '2025-12-06' ? '<i class="fa-solid fa-bell"></i>' : ''} ${match.match_date} </td>
+            <td>${match.time}</td>
             <td>${match.location == 'Domicile' ? '<i class="fas fa-house"></i>' : ''} ${match.location} ${match.location == 'Extérieur' ? '<i class="fas fa-car-side"></i>' : ''}</td>
             <td>${match.resultat == 'Gagné' ? '<i class="fa-solid fa-face-smile"></i>' : ''} ${match.resultat} ${match.resultat == 'Perdu' ? '<i class="fa-solid fa-face-sad-cry"></i>' : ''}</td>
             <td>${match.competition}</td>
