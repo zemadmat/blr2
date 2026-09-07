@@ -1,69 +1,492 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLR Calendrier des Matchs</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- Font Awesome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendrier · ARC Mosellan Handball</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16213e;
+    --ink-soft:#2b3a63;
+    --wood:#d98e3f;
+    --wood-soft:#f3ddb9;
+    --bg:#f0f3f7;
+    --card:#ffffff;
+    --line:#dde3ec;
+    --text:#1c2433;
+    --muted:#5b6472;
+    --past-bg:#e9ebee;
+    --past-text:#9aa1ac;
+    --lvl13:#2e8b74;
+    --lvl15:#d98e3f;
+    --lvl17:#3b5ba5;
+    --home:#2f7a4d;
+    --away:#8a4b2e;
+    --win:#2f7a4d;
+    --draw:#a9832e;
+    --loss:#b0402f;
+    --shadow: 0 1px 2px rgba(22,33,62,0.06), 0 6px 20px rgba(22,33,62,0.06);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--ink) 0%, var(--ink-soft) 100%);
+    color:#fff;
+    padding:22px 20px 26px;
+    position:relative;
+    overflow:hidden;
+  }
+  .topbar::after{
+    content:"";
+    position:absolute;
+    right:-40px; top:-60px;
+    width:220px;height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(217,142,63,0.35), rgba(217,142,63,0) 70%);
+  }
+  .topbar-inner{
+    max-width:1220px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    position:relative;
+    z-index:1;
+  }
+  .crest{
+    width:46px;height:46px;
+    flex:0 0 auto;
+    border-radius:10px;
+    background:var(--wood);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--ink);
+    letter-spacing:0.02em;
+  }
+  .topbar h1{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:clamp(20px,4vw,28px);
+    letter-spacing:0.01em;
+    margin:0;
+    line-height:1.15;
+  }
+  .topbar p{
+    margin:2px 0 0;
+    font-size:13.5px;
+    color:#c9d2e6;
+  }
 
-    <link href="style.css" rel="stylesheet" />
+  .filters-wrap{
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:var(--bg);
+    padding-top:14px;
+  }
+  .filters{
+    max-width:1220px;
+    margin:0 auto;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:16px 18px;
+  }
+  .filters-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px 14px;
+  }
+  .field label{
+    display:block;
+    font-size:11.5px;
+    font-weight:600;
+    color:var(--muted);
+    margin-bottom:5px;
+  }
+  .field select, .field input[type=date]{
+    width:100%;
+    padding:9px 10px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:#fafbfd;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    color:var(--text);
+  }
+  .field select:focus, .field input:focus{
+    outline:2px solid var(--wood);
+    outline-offset:1px;
+  }
+  .date-pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .filters-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:14px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .count{
+    font-size:13px;
+    color:var(--muted);
+  }
+  .count strong{color:var(--ink);}
+  .reset-btn{
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  .reset-btn:hover{background:var(--wood-soft); border-color:var(--wood);}
+
+  main{
+    max-width:1220px;
+    margin:0 auto;
+    padding:18px 20px 60px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--card);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  thead th{
+    text-align:left;
+    font-size:12px;
+    font-weight:600;
+    color:var(--muted);
+    background:#f6f8fb;
+    padding:11px 12px;
+    border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  tbody td{
+    padding:11px 12px;
+    font-size:13.5px;
+    border-bottom:1px solid var(--line);
+    vertical-align:middle;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:#f9fafc;}
+
+  .lvl-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:30px;
+    padding:3px 7px;
+    border-radius:6px;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    color:#fff;
+  }
+  .lvl-13{background:var(--lvl13);}
+  .lvl-15{background:var(--lvl15);}
+  .lvl-17{background:var(--lvl17);}
+
+  .team{display:block;}
+  .team.us{font-weight:700; color:var(--ink);}
+  .vs-row{display:flex; align-items:center; gap:8px;}
+  .vs-sep{color:var(--muted); font-size:12px;}
+
+  .tag{
+    display:inline-block;
+    padding:2px 8px;
+    border-radius:20px;
+    font-size:11.5px;
+    font-weight:600;
+  }
+  .tag.home{background:#e4f1e8; color:var(--home);}
+  .tag.away{background:#f2e6dd; color:var(--away);}
+  .tag.res-victoire{background:#e4f1e8; color:var(--win);}
+  .tag.res-nul{background:#f5ecd9; color:var(--draw);}
+  .tag.res-defaite{background:#f6e2de; color:var(--loss);}
+
+  .date-cell{white-space:nowrap;}
+  .date-cell .tbc{color:var(--muted); font-style:italic; font-weight:500;}
+  .heure{color:var(--muted); font-variant-numeric:tabular-nums;}
+
+  tr.past td{
+    background:var(--past-bg);
+    color:var(--past-text);
+  }
+  tr.past .team.us{color:var(--past-text);}
+  tr.past .lvl-badge{background:#c7ccd3; color:#fff;}
+  tr.past .tag{background:#dcdfe3 !important; color:#8b929c !important;}
+
+  .empty-state, .error-state{
+    text-align:center;
+    padding:50px 20px;
+    color:var(--muted);
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+  }
+  .empty-state strong, .error-state strong{display:block; color:var(--ink); font-size:16px; margin-bottom:6px; font-family:'Oswald',sans-serif;}
+  .error-state strong{color:var(--loss);}
+
+  .footnote{
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+    margin-top:14px;
+  }
+  .footnote code{
+    background:#e4e8ee;
+    padding:1px 5px;
+    border-radius:4px;
+  }
+
+  /* Mobile: table -> cards */
+  @media (max-width: 760px){
+    .filters-grid{grid-template-columns:1fr 1fr;}
+    table, thead, tbody, th, td, tr{display:block;}
+    thead{display:none;}
+    tbody tr{
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      margin-bottom:10px;
+      padding:12px 14px;
+      border-bottom:none;
+    }
+    tbody tr.past{background:var(--past-bg);}
+    table{background:transparent; box-shadow:none;}
+    tbody td{
+      border-bottom:none;
+      padding:4px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    tbody td::before{
+      content:attr(data-label);
+      font-size:11px;
+      font-weight:600;
+      color:var(--muted);
+      flex:0 0 auto;
+    }
+    tr.past td::before{color:var(--past-text);}
+    td.matchup{display:block;}
+    td.matchup::before{margin-bottom:4px;}
+    td.matchup .vs-row{justify-content:flex-start;}
+  }
+</style>
 </head>
-
 <body>
-    <div class="container">
-        <h1><img src="blr_rose.jpg" alt="BLR rose" width="50"> BLR Calendrier des Matchs</h1>
-        <div class="filter-container">
-            
-            
-        </div>
-        <table id="matches-table" class="table table-bordered table-hover fade-in">
-            <thead>
-                <tr>
-                    
-                    <th> <label for="team-filter">Equipe</label>
-                        <select id="team-filter" class="form-control">
-                            <option value="">Toutes les équipes</option>
-                            <!-- Options seront générées dynamiquement -->
-                        </select></th>
-                    <th>Adversaire</th>
-                    <th> <label for="date-filter">Date</label>
-                        <select id="date-filter" class="form-control">
-                            <option value="">Toutes les dates</option>
-                            <!-- Options seront générées dynamiquement -->
-                        </select>
-                    </th>
-                    <!-- Date du Match</th> -->
-                    <th>Heure</th>
-                    <th><label for="lieu-filter">Lieu</label>
-                        <select id="lieu-filter" class="form-control">
-                            <option value="">Toutes les lieux</option>
-                            <!-- Options seront générées dynamiquement -->
-                        </select></th>
-                    <th>Résultat</th>
-                    <th> <label for="competition-filter">Compétition</label>
-                        <select id="competition-filter" class="form-control">
-                            <option value="">Toutes les competitions</option>
-                            <!-- Options seront générées dynamiquement -->
-                        </select></th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Les matchs seront insérés ici -->
-            </tbody>
-        </table>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="crest">AM</div>
+    <div>
+      <h1>ARC Mosellan Handball</h1>
+      <p>Calendrier des rencontres — saison 2026-2027</p>
     </div>
+  </div>
+</div>
 
-    <!-- Bootstrap JS et dépendances -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div class="filters-wrap">
+  <div class="filters">
+    <div class="filters-grid">
+      <div class="field">
+        <label for="f-niveau">Niveau</label>
+        <select id="f-niveau">
+          <option value="tous">Tous les niveaux</option>
+          <option value="13">-13</option>
+          <option value="15">-15</option>
+          <option value="17">-17</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-lieu">Domicile / Extérieur</label>
+        <select id="f-lieu">
+          <option value="tous">Tous</option>
+          <option value="Domicile">Domicile</option>
+          <option value="Extérieur">Extérieur</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-competition">Compétition</label>
+        <select id="f-competition">
+          <option value="tous">Toutes</option>
+          <option value="Championnat">Championnat</option>
+          <option value="Coupe">Coupe</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Période</label>
+        <div class="date-pair">
+          <input type="date" id="f-du" aria-label="Du">
+          <input type="date" id="f-au" aria-label="Au">
+        </div>
+      </div>
+    </div>
+    <div class="filters-foot">
+      <div class="count"><strong id="count-n">0</strong> rencontre(s) affichée(s)</div>
+      <button class="reset-btn" id="reset">Réinitialiser les filtres</button>
+    </div>
+  </div>
+</div>
 
-    <script src="app_futur.js"></script>
+<main>
+  <table id="tbl" style="display:none;">
+    <thead>
+      <tr>
+        <th>Niv.</th>
+        <th>J.</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Rencontre</th>
+        <th>Lieu</th>
+        <th>Compétition</th>
+        <th>Résultat</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div class="empty-state" id="empty" style="display:none;">
+    <strong>Aucune rencontre ne correspond à ces filtres</strong>
+    Essayez d'élargir la période ou de réinitialiser les filtres.
+  </div>
+  <div class="error-state" id="error" style="display:none;">
+    <strong>Impossible de charger matches.json</strong>
+    Vérifiez que le fichier se trouve bien à côté de index.html.
+  </div>
+  <p class="footnote">Les dates, résultats et compétitions se modifient dans <code>matches.json</code>.</p>
+</main>
 
+<script>
+let matches = [];
+const CLUB = "ARC MOSELLAN";
+const todayStr = new Date().toISOString().slice(0,10);
+
+function estNous(nom){ return nom.includes(CLUB); }
+
+function formatDate(iso){
+  if(!iso) return null;
+  const d = new Date(iso+"T00:00:00");
+  const s = d.toLocaleDateString('fr-FR', {weekday:'short', day:'numeric', month:'short', year:'numeric'});
+  return s.charAt(0).toUpperCase()+s.slice(1);
+}
+
+function resClass(r){
+  if(r==="Victoire") return "res-victoire";
+  if(r==="Nul") return "res-nul";
+  if(r==="Défaite") return "res-defaite";
+  return "";
+}
+
+function render(){
+  const niveau = document.getElementById('f-niveau').value;
+  const lieu = document.getElementById('f-lieu').value;
+  const competition = document.getElementById('f-competition').value;
+  const du = document.getElementById('f-du').value;
+  const au = document.getElementById('f-au').value;
+
+  let filtered = matches.filter(m=>{
+    const mLieu = estNous(m.domicile) ? "Domicile" : "Extérieur";
+    if(niveau!=='tous' && String(m.niveau)!==niveau) return false;
+    if(lieu!=='tous' && mLieu!==lieu) return false;
+    if(competition!=='tous' && (m.competition||"Championnat")!==competition) return false;
+    if(du && m.date && m.date < du) return false;
+    if(au && m.date && m.date > au) return false;
+    if((du||au) && !m.date) return false;
+    return true;
+  });
+
+  filtered.sort((a,b)=>{
+    if(a.date && b.date) return a.date.localeCompare(b.date);
+    if(a.date && !b.date) return -1;
+    if(!a.date && b.date) return 1;
+    if(a.niveau!==b.niveau) return a.niveau-b.niveau;
+    return a.journee-b.journee;
+  });
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  filtered.forEach(m=>{
+    const isPast = m.date && m.date < todayStr;
+    const tr = document.createElement('tr');
+    if(isPast) tr.className='past';
+
+    const dateHtml = m.date ? formatDate(m.date) : '<span class="tbc">À confirmer</span>';
+    const heureHtml = m.heure ? m.heure : '—';
+    const nousADomicile = estNous(m.domicile);
+    const lieuTagClass = nousADomicile ? 'home' : 'away';
+    const lieuLabel = nousADomicile ? 'Domicile' : 'Extérieur';
+    const competitionLabel = m.competition || "Championnat";
+    const resultatLabel = m.resultat || '—';
+    const rClass = resClass(m.resultat);
+
+    tr.innerHTML = `
+      <td data-label="Niveau"><span class="lvl-badge lvl-${m.niveau}">${m.niveau}${m.equipe?('.'+m.equipe):''}</span></td>
+      <td data-label="Journée">${m.journee}</td>
+      <td data-label="Date" class="date-cell">${dateHtml}</td>
+      <td data-label="Heure" class="heure">${heureHtml}</td>
+      <td data-label="Rencontre" class="matchup">
+        <div class="vs-row"><span class="team ${estNous(m.domicile)?'us':''}">${m.domicile}</span></div>
+        <div class="vs-row"><span class="vs-sep">vs</span></div>
+        <div class="vs-row"><span class="team ${estNous(m.exterieur)?'us':''}">${m.exterieur}</span></div>
+      </td>
+      <td data-label="Lieu"><span class="tag ${lieuTagClass}">${lieuLabel}</span></td>
+      <td data-label="Compétition">${competitionLabel}</td>
+      <td data-label="Résultat">${resultatLabel!=='—' ? `<span class="tag ${rClass}">${resultatLabel}</span>` : '—'}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('count-n').textContent = filtered.length;
+  document.getElementById('empty').style.display = filtered.length? 'none':'block';
+  document.getElementById('tbl').style.display = filtered.length? '':'none';
+}
+
+['f-niveau','f-lieu','f-competition','f-du','f-au'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', render);
+  document.getElementById(id).addEventListener('change', render);
+});
+document.getElementById('reset').addEventListener('click', ()=>{
+  document.getElementById('f-niveau').value='tous';
+  document.getElementById('f-lieu').value='tous';
+  document.getElementById('f-competition').value='tous';
+  document.getElementById('f-du').value='';
+  document.getElementById('f-au').value='';
+  render();
+});
+
+fetch('matches.json')
+  .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(data=>{ matches = data; render(); })
+  .catch(err=>{
+    console.error("Erreur de chargement de matches.json:", err);
+    document.getElementById('error').style.display = 'block';
+  });
+</script>
 </body>
-
 </html>
