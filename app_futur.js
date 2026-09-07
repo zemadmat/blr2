@@ -8,7 +8,7 @@
 
         async function fetchMatches() {
             try {
-                const response = await fetch('matches.json');
+                const response = await fetch('matches2026.json');
                 if (!response.ok) {
                     throw new Error('Impossible de charger les matchs');
                 }
