@@ -49,7 +49,7 @@
   {"niveau": 15, "equipe": "2", "journee": 22, "date": null, "heure": null, "domicile": "VILLERUPT HANDBALL CLUB", "exterieur": "BLR ARC MOSELLAN 2", "competition": "Championnat", "resultat": ""},
 
   {"niveau": 13, "equipe": null, "journee": 1,  "date": "2026-09-19", "heure": "14:30", "domicile": "BLR ARC MOSELLAN", "exterieur": "KANFEN", "competition": "Championnat", "resultat": ""},
-  {"niveau": 13, "equipe": null, "journee": 2,  "date": 32026-09-26", "heure": "15:00", "domicile": "FOLSCHVILLER", "exterieur": "BLR ARC MOSELLAN", "competition": "Championnat", "resultat": ""},
+  {"niveau": 13, "equipe": null, "journee": 2,  "date": "2026-09-26", "heure": "15:00", "domicile": "FOLSCHVILLER", "exterieur": "BLR ARC MOSELLAN", "competition": "Championnat", "resultat": ""},
   {"niveau": 13, "equipe": null, "journee": 3,  "date": null, "heure": null, "domicile": "BLR ARC MOSELLAN", "exterieur": "ENT BOUZONVILLE / BOULAY -13 M 1", "competition": "Championnat", "resultat": ""},
   {"niveau": 13, "equipe": null, "journee": 4,  "date": null, "heure": null, "domicile": "FONTOY US HB 1", "exterieur": "BLR ARC MOSELLAN", "competition": "Championnat", "resultat": ""},
   {"niveau": 13, "equipe": null, "journee": 5,  "date": null, "heure": null, "domicile": "BLR ARC MOSELLAN", "exterieur": "P2H HANDBALL", "competition": "Championnat", "resultat": ""},
