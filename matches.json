@@ -8,7 +8,7 @@
   {"niveau": 17, "equipe": null, "journee": 8,  "date": null, "heure": null, "domicile": "ENT ARC MOSELLAN/ROMBAS U17M", "exterieur": "SARREBOURG MOSELLE SUD HANDBALL", "competition": "Championnat", "resultat": ""},
   {"niveau": 17, "equipe": null, "journee": 10, "date": null, "heure": null, "domicile": "FOLSCHVILLER", "exterieur": "ENT ARC MOSELLAN/ROMBAS U17M", "competition": "Championnat", "resultat": ""},
 
-  {"niveau": 15, "equipe": "1", "journee": 1,  "date": "2026-09-19", "heure": "16:30", "domicile": "BLR ARC MOSELLAN 1", "exterieur": "ENT AMNEVILLE HAGONDANGE METZ 15 M", "competition": "Championnat", "resultat": ""},
+  {"niveau": 15, "equipe": "1", "journee": 1,  "date": "2026-09-19", "heure": "18:30", "domicile": "BLR ARC MOSELLAN 1", "exterieur": "ENT AMNEVILLE HAGONDANGE METZ 15 M", "competition": "Championnat", "resultat": ""},
   {"niveau": 15, "equipe": "1", "journee": 2,  "date": "2026-09-26", "heure": "16:00", "domicile": "ENT FORBACH SARRALBE - 15 M", "exterieur": "BLR ARC MOSELLAN 1", "competition": "Championnat", "resultat": ""},
   {"niveau": 15, "equipe": "1", "journee": 3,  "date": null, "heure": null, "domicile": "BLR ARC MOSELLAN 1", "exterieur": "COEUR DU PAYS HAUT HANDBALL M15", "competition": "Championnat", "resultat": ""},
   {"niveau": 15, "equipe": "1", "journee": 4,  "date": null, "heure": null, "domicile": "MARLY", "exterieur": "BLR ARC MOSELLAN 1", "competition": "Championnat", "resultat": ""},
