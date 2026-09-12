@@ -1,5 +1,5 @@
 [
-  {"niveau": 17, "equipe": null, "journee": 1,  "date": "2026-09-12", "heure": "14:30", "domicile": "ENT COURCELLES/METZ/HAGONDANGE U17M", "exterieur": "ENT ARC MOSELLAN/ROMBAS U17M", "competition": "Championnat", "resultat": ""},
+  {"niveau": 17, "equipe": null, "journee": 1,  "date": "2026-09-12", "heure": "14:30", "domicile": "ENT COURCELLES/METZ/HAGONDANGE U17M", "exterieur": "ENT ARC MOSELLAN/ROMBAS U17M", "competition": "Championnat", "resultat": "Défaite"},
   {"niveau": 17, "equipe": null, "journee": 2,  "date": "2026-09-19", "heure": "14:00", "domicile": "ENT ARC MOSELLAN/ROMBAS U17M", "exterieur": "THIONVILLE MOSELLE HANDBALL", "competition": "Championnat", "resultat": ""},
   {"niveau": 17, "equipe": null, "journee": 3,  "date": "2026-09-27", "heure": "16:00", "domicile": "SARREBOURG MOSELLE SUD HANDBALL", "exterieur": "ENT ARC MOSELLAN/ROMBAS U17M", "competition": "Championnat", "resultat": ""},
   {"niveau": 17, "equipe": null, "journee": 5,  "date": null, "heure": null, "domicile": "ENT ARC MOSELLAN/ROMBAS U17M", "exterieur": "FOLSCHVILLER", "competition": "Championnat", "resultat": ""},
