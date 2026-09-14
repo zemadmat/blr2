@@ -29,7 +29,7 @@
 
   {"niveau": 15, "equipe": "2", "journee": 1,  "date": "2026-09-13", "heure": "10:30", "domicile": "SARRALBE", "exterieur": "BLR ARC MOSELLAN 2", "competition": "Championnat", "resultat": "Victoire"},
   {"niveau": 15, "equipe": "2", "journee": 2,  "date": "2026-09-19", "heure": "14:30", "domicile": "BLR ARC MOSELLAN 2", "exterieur": "SPORTS ET LOISIRS DU PAYS SIERCKOIS", "competition": "Championnat", "resultat": ""},
-  {"niveau": 15, "equipe": "2", "journee": 3,  "date": null, "heure": null, "domicile": "BLR ARC MOSELLAN 2", "exterieur": "PORCELETTE", "competition": "Championnat", "resultat": ""},
+  {"niveau": 15, "equipe": "2", "journee": 3,  "date": "2026-09-26", "heure": "18:00", "domicile": "BLR ARC MOSELLAN 2", "exterieur": "PORCELETTE", "competition": "Championnat", "resultat": ""},
   {"niveau": 15, "equipe": "2", "journee": 4,  "date": "2026-10-03", "heure": "18:00", "domicile": "FENSCH VALLEE HANDBALL", "exterieur": "BLR ARC MOSELLAN 2", "competition": "Championnat", "resultat": ""},
   {"niveau": 15, "equipe": "2", "journee": 5,  "date": null, "heure": null, "domicile": "BLR ARC MOSELLAN 2", "exterieur": "LONGUYONNAISE ENTENTE SPORTIVE", "competition": "Championnat", "resultat": ""},
   {"niveau": 15, "equipe": "2", "journee": 7,  "date": null, "heure": null, "domicile": "BLR ARC MOSELLAN 2", "exterieur": "METZ MAGNY HB", "competition": "Championnat", "resultat": ""},
